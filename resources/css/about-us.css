@@ -1,0 +1,28 @@
+@import url(/resources/css/main.css);
+
+.about-us {
+  padding: 150px 0 60px 0;
+
+  .section-title {
+    text-align: center;
+
+    > p {
+      padding: 0;
+      /* font-size: 25px; */
+      font-weight: 500;
+    }
+  }
+
+  .details {
+    padding: 20px 0;
+    align-items: center;
+
+    p {
+      text-align: left;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}

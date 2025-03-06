@@ -1,31 +1,18 @@
 import { type SharedData } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
-import HomePageImg from '/resources/img/home-page-img.png';
+import { Head, Link, usePage } from '@inertiajs/react';
 
-import FreeImgIcon from '/resources/img/icon/free-img.png';
-import ManageToolIcon from '/resources/img/icon/manage-tool.png';
-import SecureIcon from '/resources/img/icon/secure.png';
-import CreateAccountIcon from '/resources/img/icon/create-account.png';
-import ShortLinkIcon from '/resources/img/icon/short-link.png';
-import SecureLinkIcon from '/resources/img/icon/secure-link.png';
-import LinkClickedIcon from '/resources/img/icon/link-clicked.png';
-import ClipPaperIcon from '/resources/img/icon/clip-paper.png';
-import MojaveIcon from '/resources/img/icon/slider/mojave.png';
-import PayyIcon from '/resources/img/icon/slider/payy.png';
-import CaqtusIcon from '/resources/img/icon/slider/caqtus.png';
-import HunnyIcon from '/resources/img/icon/slider/hunny.png';
-import HoodooIcon from '/resources/img/icon/slider/hoodoo.png';
-import ParsleyIcon from '/resources/img/icon/slider/parsley.png';
-
-import { Header } from '@/components/header';
+import AboutPageImg from '/resources/img/about-page-img.png';
+import '../../css/about-us.css';
 
 import { useState } from 'react';
+import { ClipboardCheck } from 'lucide-react';
 
-export default function Welcome() {
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
+
+export default function AboutUs() {
     const { auth } = usePage<SharedData>().props;
     const [urlOption, setUrlOption] = useState('');
-
-    console.log('welcome')
 
     return (
         <>
@@ -34,185 +21,74 @@ export default function Welcome() {
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
             <Header />
+            
             <main className="main">
-                <section id="hero" className="hero section">
-                    <div id="hero-carousel" className="container">
+                <section id="about-us" className="about-us services section">
+                    <div className="container section-title" data-aos="fade-up">
+                    <h2>About redr.io</h2>
+                    <h3>Our process is simple; Our products are powerful.</h3>
 
-                    <div className="carousel-item">
-                        <div className="left-el">
-                        <img className="animate__animated animate__fadeInDown" src={HomePageImg} alt="home page image" />
-                        </div>
-                        <div className="right-el">
-                        <h3 className="animate__animated animate__fadeInDown">The <strong>secure</strong> way to share</h3>
-                        <h2 className="animate__animated animate__fadeInDown">Shortened URLs</h2>
-                        <p className="animate__animated animate__fadeInUp">
-                            We make it easy and secure to transform those long, ugly URLs, into short and memorable links, that can be used for a variety of
-                            purposes.
+                    <div className="details row gy-4">
+                        <div className="col-lg-8" data-aos="fade-up" data-aos-delay="100">
+                        <p>
+                            Payy is a revolutionary new product that aims to simplify the process of accepting payments by offering a variety of different payment
+                            methods. With Payy, customers can easily make payments by scanning a QR code, sending a link via SMS, or using the user-friendly
+                            payment widget. What sets Payy apart is its incorporation of AI technology, making it a one-of-a-kind product in the market. Customers
+                            can choose from different plans with additional options such as cross-selling and upselling, as well as a suggested gratuity feature.
+                            Developed by Mojave Technologies, a company known for its expertise in payment systems, security, and emerging AI technologies, Payy
+                            is poised to become a game-changer in the world of payments. With its innovative features and user-friendly interface, Payy is set to
+                            make the payment process simpler and more convenient for both businesses and customers alike.
                         </p>
                         </div>
-                    </div>
-                    </div>
 
-                    <svg className="curve-svg" width="1920" height="150" viewBox="0 0 1920 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M976.477 61.6611C589.801 62.5915 0 0 0 0V150H1920V0C1920 0 1353.63 60.7536 976.477 61.6611Z" fill="white" />
-                    </svg>
-                </section>
-
-                <section id="sorting-sec" className="sorting-sec services section">
-                    <div className="container section-title" data-aos="fade-up">
-                    <h2>Shorten your URL in just a single click</h2>
-                    <div className="input-box">
-                        <input type="text" placeholder="Your URL Here" />
-                        <div className="select-opt">
-                        <div className="dropdown custom-dropdown">
-                            <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Select Sorter Provider
-                            </button>
-                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.redr.io')}>.redr.io</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.chkout.io')}>.chkout.io</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.clnk.net')}>.clnk.net</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.refillr.io')}>.refillr.io</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.shyft.ing')}>.shyft.ing</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.rdr.im')}>.rdr.im</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.rdr.ing')}>.rdr.ing</a></li>
-                            </ul>
-                        </div>
-                        <button className="shorten-btn">
-                            <svg width="36" height="27" viewBox="0 0 36 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M13.3971 22.5275C13.0069 22.8901 12.705 23.1329 12.3964 23.3103C10.8858 24.1787 9.02463 24.1787 7.51404 23.3103C6.95737 22.9903 6.42228 22.4575 5.35208 21.3921C4.28189 20.3265 3.74679 19.7938 3.42541 19.2394C2.55326 17.7354 2.55326 15.8823 3.42541 14.3783C3.74679 13.8241 4.28189 13.2913 5.35208 12.2258L9.95521 7.64265C11.0254 6.5771 11.5605 6.04432 12.1171 5.72434C13.6278 4.85598 15.4889 4.85598 16.9995 5.72433C17.5561 6.04432 18.0912 6.5771 19.1614 7.64265C20.2316 8.70819 20.7667 9.24096 21.0882 9.79519C21.9603 11.2992 21.9603 13.1523 21.0882 14.6563C20.91 14.9636 20.6662 15.2643 20.3018 15.6527M15.7195 11.0904C15.3551 11.4788 15.1114 11.7795 14.9331 12.0867C14.0611 13.5908 14.0611 15.4438 14.9331 16.9479C15.2546 17.5022 15.7897 18.035 16.8599 19.1004C17.9301 20.166 18.4652 20.6987 19.0218 21.0188C20.5324 21.8871 22.3935 21.8871 23.9041 21.0188C24.4609 20.6987 24.996 20.166 26.0662 19.1004L30.6693 14.5173C31.7395 13.4517 32.2746 12.919 32.5958 12.3648C33.468 10.8608 33.468 9.00767 32.5958 7.50363C32.2746 6.9494 31.7395 6.41662 30.6693 5.35107C29.5991 4.28552 29.064 3.75276 28.5074 3.43277C26.9966 2.5644 25.1356 2.5644 23.625 3.43277C23.3163 3.61017 23.0144 3.85295 22.6241 4.21565"
-                                stroke="#051E16"
-                                stroke-width="4.56319"
-                                stroke-linecap="round"
-                            />
-                            </svg>
-                            Shorten
-                        </button>
+                        <div className="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                        <img src={AboutPageImg} alt="about us image" />
                         </div>
                     </div>
-                    <div className="stats">
-                        <div className="left-item">
-                        <div className="img"><img src={LinkClickedIcon} alt="" /></div>
-                        <div className="det">
-                            <strong>98,279 +</strong><br />
-                            Links clicked per day
-                        </div>
-                        </div>
-                        <div className="mid-item"></div>
-                        <div className="right-item">
-                        <div className="img"><img src={ClipPaperIcon} alt="" /></div>
-                        <div className="det">
-                            <strong>829,997 +</strong><br />
-                            Shortened links in total
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </section>
-
-                <section id="why-us" className="why-us services section">
-                    <div className="container section-title" data-aos="fade-up">
-                    <h2>Why join Redr.io?</h2>
-                    <p>
-                        Redr.io is a secure and affordable link shortening service designed for students, professionals in media, and developers. This platform
-                        allows users to create shortened URLs quickly and easily, enhancing link sharing and management. Redr.io emphasizes security and privacy,
-                        making it a reliable choice for those who need to share links while maintaining data protection.
-                    </p>
                     </div>
 
                     <div className="container">
                     <div className="row gy-4">
-                        <div className="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
+                        <div className="col-lg-3 col-md-12" data-aos="fade-up" data-aos-delay="100">
                         <div className="service-item position-relative">
                             <div className="img">
-                            <img src={FreeImgIcon} alt="" />
-                            <h3>Our basic service is free</h3>
+                            <h3>Our Company</h3>
                             </div>
                             <div className="det">
                             <p>
-                                Redr.io offers free basic services that provide users with essential link shortening capabilities at no cost. These free services
-                                allow students, media professionals, and developers to experience the platform's core features, enabling them to create and manage
-                                shortened URLs without an initial financial commitment.
+                                Payy is a new product that allows you to create frictionless payments either on your website through a QR code or through SMS
+                                text. Our Decades of experience in the payment industry shows in this product.
                             </p>
                             </div>
                         </div>
                         </div>
-                        <div className="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
+                        <div className="col-lg-3 col-md-12" data-aos="fade-up" data-aos-delay="100">
                         <div className="service-item position-relative">
                             <div className="img">
-                            <img src={ManageToolIcon} alt="" />
-                            <h3>Manage Hundreds of URLs at once</h3>
+                            <h3>Who we are</h3>
                             </div>
                             <div className="det">
-                            <p>
-                                With the ability to manage hundreds of URLs at once, Redr.io provides a powerful solution for efficient link management, combining
-                                user-friendly features, robust analytics, and customization options to streamline your link sharing and organization needs.
-                            </p>
+                            <p>We are team of talented industry professionals, from designers, Developers to our Senior Management. We know payments!</p>
                             </div>
                         </div>
                         </div>
-                        <div className="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
+                        <div className="col-lg-3 col-md-12" data-aos="fade-up" data-aos-delay="100">
                         <div className="service-item position-relative">
                             <div className="img">
-                            <img src={SecureIcon} alt="" />
-                            <h3>The secure way to shorten URLs</h3>
+                            <h3>What we Value</h3>
                             </div>
                             <div className="det">
-                            <p>
-                                Redr.io offers the easiest and safest way to transform long, confusing URLs into short, memorable links. This secure link
-                                shortening service enhances your sharing experience while prioritizing data protection.
-                            </p>
+                            <p>Building really cool Financial products that make it more affordable for small Merchants to grow their business.</p>
                             </div>
                         </div>
                         </div>
-                    </div>
-                    </div>
-                </section>
-
-                <section id="uptime" className="uptime services section">
-                    <div className="container section-title" data-aos="fade-up">
-                    <h2>99% Uptime</h2>
-                    <p>
-                        We guarantee that our network will be operational 99.9% of the time each month, providing you with reliable service. This .1% safety
-                        margin allows us to address repairs and unforeseen events as they arise. Additionally, you can monitor our network status 24/7, 365 days a
-                        year, ensuring transparency and peace of mind.
-                    </p>
-                    </div>
-                </section>
-
-                <section id="howto" className="howto services section">
-                    <div className="container section-title" data-aos="fade-up">
-                    <h2>How to start</h2>
-                    <p>
-                        To get started, simply create an account to access all features, then shorten your link by entering a long URL to generate a compact,
-                        shareable version. Finally, secure your link to ensure safe and controlled sharing.
-                    </p>
-                    </div>
-
-                    <div className="container">
-                    <div className="row gy-4">
-                        <div className="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
+                        <div className="col-lg-3 col-md-12" data-aos="fade-up" data-aos-delay="100">
                         <div className="service-item position-relative">
                             <div className="img">
-                            <img src={CreateAccountIcon} alt="" />
-                            <h3>CREATE AN ACCOUNT</h3>
+                            <h3>Contact Us</h3>
                             </div>
-                        </div>
-                        </div>
-                        <div className="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
-                        <div className="service-item position-relative">
-                            <div className="img">
-                            <img src={ShortLinkIcon} alt="" />
-                            <h3>SHORTEN YOUR LINK</h3>
-                            </div>
-                        </div>
-                        </div>
-                        <div className="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="100">
-                        <div className="service-item position-relative">
-                            <div className="img">
-                            <img src={SecureLinkIcon} alt="" />
-                            <h3>SECURE YOUR LINK</h3>
+                            <div className="det">
+                            <p>You can contact us either through our live chat or web-based form.</p>
                             </div>
                         </div>
                         </div>
@@ -221,71 +97,7 @@ export default function Welcome() {
                 </section>
             </main>
 
-    <footer id="footer" className="footer">
-      <svg className="curve-svg" width="1920" height="150" viewBox="0 0 1920 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M976.477 61.6611C589.801 62.5915 0 0 0 0V150H1920V0C1920 0 1353.63 60.7536 976.477 61.6611Z" fill="white" />
-      </svg>
-      <div className="container footer-top contact">
-        <div className="col-lg-8">
-          <div className="container section-title" data-aos="fade-up">
-            <h2>Get in touch!</h2>
-            <p>We thrive to ensure that you get the most out of your experience</p>
-          </div>
-          <form action="#" method="post" className="php-email-form" data-aos="fade-up" data-aos-delay="200">
-            <div className="row gy-4">
-              <div className="col-md-6">
-                <input type="text" name="name" className="form-control" placeholder="Full Name" required="" />
-              </div>
-
-              <div className="col-md-6">
-                <input type="email" className="form-control" name="email" placeholder="Email" required="" />
-              </div>
-
-              <div className="col-md-12">
-                <textarea className="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-              </div>
-
-              <div className="col-md-12 text-center">
-                <div className="loading">Loading</div>
-                <div className="error-message"></div>
-                <div className="sent-message">Your message has been sent. Thank you!</div>
-
-                <div className="form-footer">
-                  <div className="form-check">
-                    <input className="form-check-input" type="checkbox" id="gridCheck1" />
-                    <label className="form-check-label" htmlFor="gridCheck1"> I agree to receive emails, newsletters and promotional messages </label>
-                  </div>
-                  <div className="line"></div>
-                  <button type="submit">Send Message</button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <div className="brand-section">
-        <div className="swiper mySwiper container">
-          <div className="swiper-wrapper">
-            <div className="swiper-slide"><img src={MojaveIcon} alt="image" /></div>
-            <div className="swiper-slide"><img src={PayyIcon} alt="image" /></div>
-            <div className="swiper-slide"><img src={CaqtusIcon} alt="image" /></div>
-            <div className="swiper-slide"><img src={HunnyIcon} alt="image" /></div>
-            <div className="swiper-slide"><img src={HoodooIcon} alt="image" /></div>
-            <div className="swiper-slide"><img src={ParsleyIcon} alt="image" /></div>
-          </div>
-          <div className="swiper-pagination"></div>
-        </div>
-      </div>
-
-      <div className="cory-inner text-center">
-        <div className="copyright container">
-          <div className="">
-            <p>© <span>Copyright 2025 | </span> <strong className="px-1 sitename">redr.io</strong> <span>All Rights Reserved</span></p>
-          </div>
-        </div>
-      </div>
-    </footer>
+            <Footer />
             {/* <div className="flex min-h-screen flex-col items-center bg-[#FDFDFC] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-[#0a0a0a]">
                 <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl">
                     <nav className="flex items-center justify-end gap-4">

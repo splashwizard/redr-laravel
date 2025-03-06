@@ -9,6 +9,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthLayout from '@/layouts/auth-layout';
+import { Link } from '@inertiajs/react';
+import GoogleIcon from '/resources/img/icon/google.png';
 
 type LoginForm = {
     email: string;
@@ -37,66 +39,56 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
     return (
         <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
-            <Head title="Log in" />
+            <Head title="Log in" >
+                <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+            </Head>
 
-            <form className="flex flex-col gap-6" onSubmit={submit}>
-                <div className="grid gap-6">
-                    <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            required
-                            autoFocus
-                            tabIndex={1}
-                            autoComplete="email"
-                            value={data.email}
-                            onChange={(e) => setData('email', e.target.value)}
-                            placeholder="email@example.com"
-                        />
-                        <InputError message={errors.email} />
-                    </div>
-
-                    <div className="grid gap-2">
-                        <div className="flex items-center">
-                            <Label htmlFor="password">Password</Label>
-                            {canResetPassword && (
-                                <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
-                                    Forgot password?
-                                </TextLink>
-                            )}
+            <div className="account-wrapper aos-init aos-animate" data-aos="fade-up">
+                <div className="account-body">
+                    <h4 className="title mb-20">Welcome To redr.io</h4>
+                    <form className="account-form" onSubmit={submit}>
+                        <div className="form-group">
+                            <label htmlFor="sign-up">Your Email </label>
+                            <input
+                                type="text"
+                                id="sign-up"
+                                required
+                                autoFocus
+                                tabIndex={1}
+                                value={data.email}
+                                onChange={(e) => setData('email', e.target.value)}
+                                placeholder="Enter Your Email"
+                            />
+                            <InputError message={errors.email} />
                         </div>
-                        <Input
-                            id="password"
-                            type="password"
-                            required
-                            tabIndex={2}
-                            autoComplete="current-password"
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            placeholder="Password"
-                        />
-                        <InputError message={errors.password} />
-                    </div>
-
-                    <div className="flex items-center space-x-3">
-                        <Checkbox id="remember" name="remember" checked={data.remember} onClick={() => setData('remember', !data.remember)} tabIndex={3} />
-                        <Label htmlFor="remember">Remember me</Label>
-                    </div>
-
-                    <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={processing}>
-                        {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                        Log in
-                    </Button>
+                        <div className="form-group">
+                            <label htmlFor="pass">Password</label>
+                            <input type="text"
+                                id="pass"
+                                required
+                                tabIndex={2}
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                                placeholder="Enter Your Password"
+                            />
+                            <InputError message={errors.password} />
+                            <TextLink href={route('password.request')} className="sign-in-recovery">Forgot your password? <a href="forgot-password.html">recover password</a></TextLink>
+                        </div>
+                        <div className="form-group text-center">
+                            <button type="submit" className="mt-2 mb-2">Sign In</button>
+                        </div>
+                    </form>
                 </div>
-
-                <div className="text-muted-foreground text-center text-sm">
-                    Don't have an account?{' '}
-                    <TextLink href={route('register')} tabIndex={5}>
-                        Sign up
-                    </TextLink>
+                <div className="or">
+                    <span>OR</span>
                 </div>
-            </form>
+                <div className="account-header pb-0">
+                    <span className="d-block mt-2">Sign up with your work email</span>
+                    <a href="#0" className="sign-in-with"><img src={GoogleIcon} alt="icon" /><span>Sign In with Google</span></a>
+                    <span className="d-block mt-15">Don't have an account? <Link href={route('register')}>Sign Up Here</Link></span>
+                </div>
+            </div>
 
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
         </AuthLayout>

@@ -1,0 +1,50 @@
+/* @import url(/resources/css/main.css); */
+@import url(/resources/css/dashboard.css);
+.only-tab-btn {
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: var(--heading-font);
+  font-weight: 600;
+  transition: 0.3s;
+  justify-content: center;
+
+  cursor: pointer;
+  clear: both;
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+}
+
+.dashboard-btn {
+  border: 2px solid var(--accent-color-dark-2) !important;
+  color: var(--accent-color-dark-2) !important;
+
+  &:hover {
+    background-color: var(--accent-color-dark-2);
+    color: white !important;
+  }
+}
+
+.logout-btn {
+  border: 2px solid red !important;
+  color: red !important;
+
+  &:hover {
+    background-color: red;
+    color: white !important;
+  }
+}
+
+/* Custom styles for mobile dropdown */
+@media (max-width: 768px) {
+  .only-tab-btn {
+    margin: 5px;
+    padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+  }
+}
