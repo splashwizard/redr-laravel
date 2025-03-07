@@ -1888,3 +1888,17 @@ input:checked + .slider:before {
   display: block;
   margin-top: 0; /* Adjusts the dropdown to appear correctly */
 }
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  i.down-arr {
+    margin-left: -5px;
+  }
+
+  p {
+    margin: 0 !important;
+  }
+}

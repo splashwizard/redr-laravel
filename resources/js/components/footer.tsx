@@ -5,6 +5,29 @@ import CaqtusIcon from '/resources/img/icon/slider/caqtus.png';
 import HunnyIcon from '/resources/img/icon/slider/hunny.png';
 import HoodooIcon from '/resources/img/icon/slider/hoodoo.png';
 import ParsleyIcon from '/resources/img/icon/slider/parsley.png';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+
+function SwiperSection() {
+    return (
+    <Swiper
+        spaceBetween={50}
+        slidesPerView={6}
+        onSlideChange={() => console.log('slide change')}
+        onSwiper={(swiper) => console.log(swiper)}
+        className='container'
+        >
+        <SwiperSlide><img src={MojaveIcon} alt="image" /></SwiperSlide>
+        <SwiperSlide><img src={PayyIcon} alt="image" /></SwiperSlide>
+        <SwiperSlide><img src={CaqtusIcon} alt="image" /></SwiperSlide>
+        <SwiperSlide><img src={HunnyIcon} alt="image" /></SwiperSlide>
+        <SwiperSlide><img src={HoodooIcon} alt="image" /></SwiperSlide>
+        <SwiperSlide><img src={ParsleyIcon} alt="image" /></SwiperSlide>
+    </Swiper>
+    )
+}
 
 export function Footer() {
     return (
@@ -50,19 +73,8 @@ export function Footer() {
                 </form>
                 </div>
             </div>
-
-            <div className="brand-section">
-                <div className="swiper mySwiper container">
-                <div className="swiper-wrapper">
-                    <div className="swiper-slide"><img src={MojaveIcon} alt="image" /></div>
-                    <div className="swiper-slide"><img src={PayyIcon} alt="image" /></div>
-                    <div className="swiper-slide"><img src={CaqtusIcon} alt="image" /></div>
-                    <div className="swiper-slide"><img src={HunnyIcon} alt="image" /></div>
-                    <div className="swiper-slide"><img src={HoodooIcon} alt="image" /></div>
-                    <div className="swiper-slide"><img src={ParsleyIcon} alt="image" /></div>
-                </div>
-                <div className="swiper-pagination"></div>
-                </div>
+            <div className="brand-section container">
+                <SwiperSection />
             </div>
 
             <div className="cory-inner text-center">

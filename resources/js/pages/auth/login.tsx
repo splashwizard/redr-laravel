@@ -64,7 +64,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         </div>
                         <div className="form-group">
                             <label htmlFor="pass">Password</label>
-                            <input type="text"
+                            <input type="password"
                                 id="pass"
                                 required
                                 tabIndex={2}

@@ -4,6 +4,7 @@ import { Link, usePage } from '@inertiajs/react';
 
 import redrLogo from '/resources/img/redr-logo.png';
 import UserIcon from '/resources/img/icon/user.png';
+import '../../css/dashboard.css';
 
 export function Header() {
     const { auth } = usePage<SharedData>().props;
@@ -11,13 +12,11 @@ export function Header() {
 
     // console.log('location.pathname', location.pathname);
 
-    console.log('auth', auth)
-
     return (
         <header id="header" className="header d-flex align-items-center fixed-top">
             <div className="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
                 <div className="col-3">
-                    <a href="index.html" className="logo d-flex align-items-left">
+                    <a href={route('dashboard')} className="logo d-flex align-items-left">
                         <img id="white-bg-ed" src={redrLogo} alt="Logo" />
                         <img id="black-bg-ed" src="assets/img/redr-logo-color.png" alt="Logo" style={{display: 'none'}} />
                     </a>
@@ -44,7 +43,7 @@ export function Header() {
                                         <a href="#" className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">loyalty</i> Subscriptions</a>
                                         <a href="#" className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">paid</i> Billing</a>
                                         <a href="#" className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">settings</i> Settings</a>
-                                        <Link className="block w-full" method="post" href={route('logout')} as="button">
+                                        <Link className="dropdown-item" method="post" href={route('logout')} as="button">
                                             <i className="material-icons-outlined dropdown-item-icon text-primary">power_settings_new</i>
                                             Logout
                                         </Link>
