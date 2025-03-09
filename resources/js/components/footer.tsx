@@ -73,7 +73,7 @@ export function Footer() {
                 </form>
                 </div>
             </div>
-            <div className="brand-section container">
+            <div className="brand-section">
                 <SwiperSection />
             </div>
 

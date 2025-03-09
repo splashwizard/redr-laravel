@@ -439,7 +439,7 @@ export default function Dashboard() {
                     </div>
                 </section>
             </main>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
     
