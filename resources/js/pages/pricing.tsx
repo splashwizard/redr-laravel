@@ -19,7 +19,7 @@ import { Footer } from '@/components/footer';
 
 export default function AboutUs() {
     const { auth } = usePage<SharedData>().props;
-    const [price, setPrice] = useState('');
+    const [price, setPrice] = useState('annualpay');
 
     return (
         <>
@@ -39,8 +39,8 @@ export default function AboutUs() {
                 </div>
                 <div className="price-toggle form-switch" data-aos="fade-up">
                 <div className="switch-wrapper">
-                    <a id="anualpay" onClick={() => setPrice('anualpay')} className="active">Pay annually</a>
-                    <a id="monthlypay" onClick={() => setPrice('monthlypay')}>Pay monthly</a>
+                    <a id="anualpay" onClick={() => setPrice('annualpay')} className={price === 'annualpay' ? 'active' : ''}>Pay annually</a>
+                    <a id="monthlypay" onClick={() => setPrice('monthlypay')} className={price === 'monthlypay' ? 'active' : ''}>Pay monthly</a>
                 </div>
                 </div>
 
@@ -49,8 +49,8 @@ export default function AboutUs() {
                     <div className="col-xl-4 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div className="pricing-item">
                         <h3>Free</h3>
-                        <h4 className="month-price hide"><sup>$</sup>0.00<span> / month</span></h4>
-                        <h4 className="year-price"><sup>$</sup>0.00<span> / year</span></h4>
+                        <h4 className={price === 'monthlypay' ? 'month-price' : 'month-price hide'}><sup>$</sup>0.00<span> / month</span></h4>
+                        <h4 className={price === 'annualpay' ? 'year-price' : 'year-price hide'}><sup>$</sup>0.00<span> / year</span></h4>
                         <div className="btn-wrap">
                         <a href="#" className="btn-buy">Get Started <i className="material-icons">arrow_forward</i></a>
                         </div>
@@ -73,8 +73,8 @@ export default function AboutUs() {
                         <h3>Guarded</h3>
                         <h3 className="reco-txt"><span>Recommended</span></h3>
                         </div>
-                        <h4 className="month-price hide"><sup>$</sup>9.99<span> / month</span></h4>
-                        <h4 className="year-price"><sup>$</sup>107.89<span> / year</span></h4>
+                        <h4 className={price === 'monthlypay' ? 'month-price' : 'month-price hide'}><sup>$</sup>9.99<span> / month</span></h4>
+                        <h4 className={price === 'annualpay' ? 'year-price' : 'year-price hide'}><sup>$</sup>107.89<span> / year</span></h4>
                         <div className="btn-wrap">
                         <a href="#" className="btn-buy">Get Started <i className="material-icons">arrow_forward</i></a>
                         </div>
@@ -94,8 +94,8 @@ export default function AboutUs() {
                     <div className="col-xl-4 col-lg-4" data-aos="fade-up" data-aos-delay="400">
                     <div className="pricing-item">
                         <h3>Secured</h3>
-                        <h4 className="month-price hide"><sup>$</sup>49.99<span> / month</span></h4>
-                        <h4 className="year-price"><sup>$</sup>539.89<span> / year</span></h4>
+                        <h4 className={price === 'monthlypay' ? 'month-price' : 'month-price hide'}><sup>$</sup>49.99<span> / month</span></h4>
+                        <h4 className={price === 'annualpay' ? 'year-price' : 'year-price hide'}><sup>$</sup>539.89<span> / year</span></h4>
                         <div className="btn-wrap">
                         <a href="#" className="btn-buy">Get Started <i className="material-icons">arrow_forward</i></a>
                         </div>

@@ -24,9 +24,7 @@ import { Footer } from '@/components/footer';
 
 export default function Welcome() {
     const { auth } = usePage<SharedData>().props;
-    const [urlOption, setUrlOption] = useState('');
-
-    console.log('welcome')
+    const [urlOption, setUrlOption] = useState('.redr.io');
 
     return (
         <>
@@ -45,7 +43,7 @@ export default function Welcome() {
                         </div>
                         <div className="right-el">
                         <h3 className="animate__animated animate__fadeInDown">The <strong>secure</strong> way to share</h3>
-                        <h2 className="animate__animated animate__fadeInDown">Shortened URLs</h2>
+                        <h2 className="animate__animated animate__fadeInDown">Shortened URLs1</h2>
                         <p className="animate__animated animate__fadeInUp">
                             We make it easy and secure to transform those long, ugly URLs, into short and memorable links, that can be used for a variety of
                             purposes.
@@ -67,16 +65,16 @@ export default function Welcome() {
                         <div className="select-opt">
                         <div className="dropdown custom-dropdown">
                             <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Select Sorter Provider
+                                {urlOption}
                             </button>
                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.redr.io')}>.redr.io</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.chkout.io')}>.chkout.io</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.clnk.net')}>.clnk.net</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.refillr.io')}>.refillr.io</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.shyft.ing')}>.shyft.ing</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.rdr.im')}>.rdr.im</a></li>
-                            <li><a className="dropdown-item" href="#" onClick={() => setUrlOption('.rdr.ing')}>.rdr.ing</a></li>
+                            <li><a className={urlOption === ".redr.io" ? "dropdown-item selected" : "dropdown-item"} href="#" onClick={() => setUrlOption('.redr.io')}>.redr.io</a></li>
+                            <li><a className={urlOption === ".chkout.io" ? "dropdown-item selected" : "dropdown-item"} href="#" onClick={() => setUrlOption('.chkout.io')}>.chkout.io</a></li>
+                            <li><a className={urlOption === ".clnk.net" ? "dropdown-item selected" : "dropdown-item"} href="#" onClick={() => setUrlOption('.clnk.net')}>.clnk.net</a></li>
+                            <li><a className={urlOption === ".refillr.io" ? "dropdown-item selected" : "dropdown-item"} href="#" onClick={() => setUrlOption('.refillr.io')}>.refillr.io</a></li>
+                            <li><a className={urlOption === ".shyft.ing" ? "dropdown-item selected" : "dropdown-item"} href="#" onClick={() => setUrlOption('.shyft.ing')}>.shyft.ing</a></li>
+                            <li><a className={urlOption === ".rdr.im" ? "dropdown-item selected" : "dropdown-item"} href="#" onClick={() => setUrlOption('.rdr.im')}>.rdr.im</a></li>
+                            <li><a className={urlOption === ".rdr.ing" ? "dropdown-item selected" : "dropdown-item"} href="#" onClick={() => setUrlOption('.rdr.ing')}>.rdr.ing</a></li>
                             </ul>
                         </div>
                         <button className="shorten-btn">

@@ -5,15 +5,21 @@ import { Link, usePage } from '@inertiajs/react';
 import redrLogo from '/resources/img/redr-logo.png';
 import UserIcon from '/resources/img/icon/user.png';
 import '../../css/dashboard.css';
+import { useState } from 'react';
 
 export function Header() {
     const { auth } = usePage<SharedData>().props;
+    const [mobileNav, showMobileNav] = useState(false);
     // const location = useLocation()
 
     // console.log('location.pathname', location.pathname);
 
+    const mobileNavToogle = () => {
+        showMobileNav(!mobileNav);
+    }
+
     return (
-        <header id="header" className="header d-flex align-items-center fixed-top">
+        <header id="header" className={mobileNav ? "header d-flex align-items-center fixed-top mobile-nav-active" : "header d-flex align-items-center fixed-top"}>
             <div className="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
                 <div className="col-3">
                     <a href={route('dashboard')} className="logo d-flex align-items-left">
@@ -72,7 +78,7 @@ export function Header() {
                                     <Link href={route('register')} className="reg-btn theme-btn me-sm-4">REGISTER</Link>
                                     </li>
                                 </ul>
-                                <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                                <i className={mobileNav ? "mobile-nav-toggle d-xl-none bi bi-x" : "mobile-nav-toggle d-xl-none bi bi-list"} onClick={() => mobileNavToogle()}></i>
                             </nav>
 
                             <div className="col-3 right-elements d-none d-xl-flex d-flex align-items-center">
