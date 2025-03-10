@@ -35,7 +35,10 @@ export default function Register() {
 
     return (
         <AuthLayout title="Create an account" description="Enter your details below to create your account">
-            <Head title="Register" />
+            <Head title="Register" >
+                <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+            </Head>
             <div className="account-wrapper" data-aos="fade-up">
                 <div className="account-body">
                     <h4 className="title mb-20">Let's get started</h4>
