@@ -2,7 +2,10 @@ import '../css/app.css';
 import '../css/bootstrap/bootstrap.bundle.min.js';
 import '../css/bootstrap/bootstrap.min.css';
 import '../css/bootstrap-icons/bootstrap-icons.css';
+// import '../css/aos/aos.css';
+import '../css/animate.css/animate.min.css';
 import '../css/main.css';
+// import '../css/aos/aos.js';
 
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';

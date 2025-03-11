@@ -39,11 +39,11 @@ export default function Welcome() {
 
                     <div className="carousel-item">
                         <div className="left-el">
-                        <img className="animate__animated animate__fadeInDown" src={HomePageImg} alt="home page image" />
+                        <img className="animate__animated animate__fadeInDown" src={HomePageImg} alt="home page image" style={{maxWidth: 'none'}} />
                         </div>
                         <div className="right-el">
                         <h3 className="animate__animated animate__fadeInDown">The <strong>secure</strong> way to share</h3>
-                        <h2 className="animate__animated animate__fadeInDown">Shortened URLs1</h2>
+                        <h2 className="animate__animated animate__fadeInDown">Shortened URLs</h2>
                         <p className="animate__animated animate__fadeInUp">
                             We make it easy and secure to transform those long, ugly URLs, into short and memorable links, that can be used for a variety of
                             purposes.

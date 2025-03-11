@@ -24,7 +24,11 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
     return (
         <AuthLayout title="Forgot password" description="Enter your email to receive a password reset link">
-            <Head title="Forgot password" />
+            <Head title="Forgot password">
+                <link rel="preconnect" href="https://fonts.bunny.net" />
+                <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+            </Head>
 
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
 
@@ -48,7 +52,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                         <InputError message={errors.email} />
                         </div>
                         <div className="form-group text-center">
-                            <Button className="w-full mt-2 mb-2" disabled={processing}>
+                            <Button className="w-full mt-2 mb-2 bg-black" disabled={processing}>
                                 {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                                 Email password reset link
                             </Button>
