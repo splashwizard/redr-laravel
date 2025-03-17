@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\URLController;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -32,7 +33,19 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+
 });
+
+
+// Route::resource('urls', URLController::class);
+Route::get('/urls', [URLController::class, 'index']);
+Route::post('/urls/{id}', [URLController::class, 'change']);
+Route::post('/urls', [URLController::class, 'store']);
+Route::delete('/urls/{id}', [URLController::class, 'delete']);
+
+// Route::get('urls/get', function () {
+//     return response()->json(DB::table('urls')->get());
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)

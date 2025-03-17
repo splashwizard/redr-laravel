@@ -5,8 +5,9 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import '../../css/dashboard.css';
 import '../../css/user-profile.css';
-import { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   Chart as ChartJS,
   CategoryScale,

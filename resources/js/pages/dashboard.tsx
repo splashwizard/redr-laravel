@@ -4,7 +4,9 @@ import { type BreadcrumbItem } from '@/types';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import '../../css/dashboard.css';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -52,7 +54,7 @@ const options = {
 const data = [
 {
     id: 1,
-    sourceUrl: "https://example.com/long-url",
+    sourceUrl: "https://example.com/long-urlaaaaaaaaaaaaaaaaab",
     shortUrl: "https://short.url/abc",
     dateUpdated: "2023-10-01",
     expOn: "2023-12-31",
@@ -94,9 +96,9 @@ const mockData = {
 function UrlTr({ url, setDeletingId } : any) {
     const [isSetting, setIsSetting] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
-    const [sourceUrl, setSourceUrl] = useState(url.sourceUrl);
-    const [shortUrl, setShortUrl] = useState(url.shortUrl);
-    const [dateUpdated, setDateUpdated] = useState(url.dateUpdated);
+    const [sourceURL, setSourceURL] = useState(url.sourceURL);
+    const [shortURL, setShortURL] = useState(url.shortURL);
+    const [dateUpdated, setDateUpdated] = useState(url.updated_at);
     const [expOn, setExpOn] = useState(url.expOn);
     const [masked, setMasked] = useState(url.masked);
 
@@ -109,22 +111,35 @@ function UrlTr({ url, setDeletingId } : any) {
     }
 
     const handleClickSave = () => {
-        setIsEditing(false);
-        setIsSetting(false);
+        axios
+            .post(`urls/${url.id}`, {
+                sourceURL,
+                shortURL
+            })
+            .then((response) => {
+                setIsEditing(false);
+                setIsSetting(false);
+            })
+            .catch((error) => {
+                console.log({ errors: error.response.data.errors })
+        });
     }
 
     const handleDelete = () => {
         setDeletingId(url.id);
+
     }
 
     return (
         <tr>
             <td><input type="checkbox" className="row-checkbox" data-id="1"/></td>
-            <td><span className="editable" data-field="sourceUrl">{ isEditing ? <input className="editable-input" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} /> : sourceUrl}</span></td>
-            <td><span className="editable" data-field="shortUrl">{ isEditing ? <input className="editable-input" value={shortUrl} onChange={(e) => setShortUrl(e.target.value)} /> : shortUrl}</span></td>
-            <td><span className="editable" data-field="dateUpdated">{ isEditing ? <input className="editable-input" value={dateUpdated} onChange={(e) => setDateUpdated(e.target.value)} /> : dateUpdated}</span></td>
-            <td><span className="editable" data-field="expOn">{ isEditing ? <input className="editable-input" value={expOn} onChange={(e) => setExpOn(e.target.value)} /> : expOn}</span></td>
-            <td><span className="editable" data-field="dateUpdated">{ isEditing ? <input className="editable-input" value={masked} onChange={(e) => setMasked(e.target.value)} /> : masked}</span></td>
+            <td><span className="editable" data-field="sourceUrl">{ isEditing ? <input className="editable-input" value={sourceURL} onChange={(e) => setSourceURL(e.target.value)} /> : sourceURL}</span></td>
+            <td><span className="editable" data-field="shortUrl">{ isEditing ? <input className="editable-input" value={shortURL} onChange={(e) => setShortURL(e.target.value)} /> : shortURL}</span></td>
+            <td><span className="editable" data-field="dateUpdated">{dateUpdated}</span></td>
+            <td><span className="editable" data-field="expOn">{ expOn}</span></td>
+            <td><span className="editable" data-field="dateUpdated">{masked}</span></td>
+            {/* <td><span className="editable" data-field="expOn">{ isEditing ? <input className="editable-input" value={expOn} onChange={(e) => setExpOn(e.target.value)} /> : expOn}</span></td> */}
+            {/* <td><span className="editable" data-field="dateUpdated">{ isEditing ? <input className="editable-input" value={masked} onChange={(e) => setMasked(e.target.value)} /> : masked}</span></td> */}
             <td>
                 {isSetting ? isEditing ? <button className="btn btn-sm btn-success save-button" data-id={url.id} onClick={handleClickSave}>
                     <i className="material-icons">check</i> Save
@@ -147,7 +162,7 @@ function UrlTr({ url, setDeletingId } : any) {
 }
 
 export default function Dashboard() {
-    const [urls, setURLs] = useState(data);
+    const [urls, setURLs] = useState([]);
     const [timeRange, setTimeRange] = useState('7d');
     const [dataLabels, setDataLabels] = useState(labels["7d"]);
     const [datasets, setDatasets] = useState([
@@ -160,6 +175,24 @@ export default function Dashboard() {
         },
     ]);
     const [deletingId, setDeletingId] = useState('');
+    const [newUrl, setNewURL] = useState({
+        singleURL: '',
+        bulkURL: ''
+    });
+    const closeRef = useRef(null);
+
+
+    useEffect(() => {
+        fetchURLs();
+    }, [])
+
+    const fetchURLs = () => {
+        console.log('Get Data by BackEnd!');
+        axios.get('urls').then((response) => {
+            console.log('data', response.data);
+            setURLs(response.data);
+        })
+    }
 
     const handleChangeTimeRange = (e) => {
         setTimeRange(e.target.value);
@@ -167,8 +200,15 @@ export default function Dashboard() {
     }
 
     const handleConfirmDelete = () => {
-        console.log('setDeletingId', deletingId, urls.filter(url => url.id !== parseInt(deletingId)))
-        setURLs(urls.filter(url => url.id !== parseInt(deletingId)));
+        // 
+        axios
+            .delete(`urls/${deletingId}`)
+            .then((response) => {
+                setURLs(urls.filter(url => url.id !== parseInt(deletingId)));
+            })
+            .catch((error) => {
+                console.log({ errors: error.response.data.errors })
+        });
     }
 
     const updateChart = (range: string) => {
@@ -183,6 +223,27 @@ export default function Dashboard() {
             },
         ])
     }
+
+    const updateNewURL = (property: string, value: string) => {
+        setNewURL({
+            ...newUrl,
+            [property]: value
+        })
+    }
+
+    const handleAddURL=(e) => {
+        e.preventDefault();
+        axios
+            .post("urls", newUrl)
+            .then((response) => {
+                closeRef.current.click();
+                fetchURLs();
+
+            })
+            .catch((error) => this.setState({ errors: error.response.data.errors }));
+    }
+
+    console.log('rendering', urls);
 
     return (
         <>
@@ -255,17 +316,17 @@ export default function Dashboard() {
                                         <div className="modal-content">
                                         <div className="modal-header">
                                             <h5 className="modal-title" id="add-urls-modal-label">Add URLs</h5>
-                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" ref={closeRef} aria-label="Close"></button>
                                         </div>
                                         <div className="modal-body">
                                             <form id="add-urls-form">
                                             <div className="mb-3">
                                                 <label htmlFor="single-url" className="form-label">Add Single URL</label>
-                                                <input type="text" className="form-control" id="single-url" placeholder="Enter a single URL" />
+                                                <input type="text" className="form-control" id="single-url" value={newUrl.singleURL}  onChange={e => updateNewURL('singleURL', e.target.value) }placeholder="Enter a single URL" />
                                             </div>
                                             <div className="mb-3">
                                                 <label htmlFor="bulk-urls" className="form-label">Add URLs in Bulk</label>
-                                                <textarea className="form-control" id="bulk-urls" rows={3} placeholder="Enter URLs separated by new lines"></textarea>
+                                                <textarea className="form-control" id="bulk-urls" rows={3} value={newUrl.bulkURL} onChange={e => updateNewURL('bulkURL', e.target.value)} placeholder="Enter URLs separated by new lines"></textarea>
                                             </div>
                                             <div className="mb-3">
                                                 <label htmlFor="excel-upload" className="form-label">Upload Excel Document</label>
@@ -274,7 +335,7 @@ export default function Dashboard() {
                                             </form>
                                         </div>
                                         <div className="modal-footer">
-                                            <button type="submit" className="btn add-buy" form="add-urls-form">Add URL(s)</button>
+                                            <button type="submit" className="btn add-buy" form="add-urls-form" onClick={handleAddURL}>Add URL(s)</button>
                                         </div>
                                         </div>
                                     </div>
