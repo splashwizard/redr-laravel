@@ -31,9 +31,11 @@ class URLController extends Controller
     public function store(Request $request)
     {
         // Validate the incoming request
-        // $request->validate([
-        //     'url' => 'required|url|unique:urls,url',
-        // ]);
+        $request->validate([
+            'file' => 'required|file',
+        ]);
+
+        $filePath = $request->file('file')->store('uploads', 'public');
 
         // Create a new URL record
     
@@ -42,6 +44,7 @@ class URLController extends Controller
             $url = new Url();
             $url->sourceURL = $request->input('singleURL'); // Assign value from request
             $url->shortURL = $bulk_url;
+            $url->file = $filePath;
             $url->save(); // Save to database
         }
 

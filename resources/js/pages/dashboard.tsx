@@ -179,12 +179,17 @@ export default function Dashboard() {
         singleURL: '',
         bulkURL: ''
     });
+    const [file, setFile] = useState(null);
     const closeRef = useRef(null);
 
 
     useEffect(() => {
         fetchURLs();
     }, [])
+
+    const onFileChange = (e) => {
+        setFile(e.target.files[0]);
+    }
 
     const fetchURLs = () => {
         console.log('Get Data by BackEnd!');
@@ -232,9 +237,13 @@ export default function Dashboard() {
     }
 
     const handleAddURL=(e) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('singleURL', newUrl.singleURL);
+        formData.append('bulkURL', newUrl.bulkURL);
         e.preventDefault();
         axios
-            .post("urls", newUrl)
+            .post("urls", formData)
             .then((response) => {
                 closeRef.current.click();
                 fetchURLs();
@@ -330,7 +339,7 @@ export default function Dashboard() {
                                             </div>
                                             <div className="mb-3">
                                                 <label htmlFor="excel-upload" className="form-label">Upload Excel Document</label>
-                                                <input className="form-control" type="file" id="excel-upload" accept=".xlsx, .xls"/>
+                                                <input className="form-control" type="file" id="excel-upload" onChange={onFileChange} accept=".xlsx, .xls"/>
                                             </div>
                                             </form>
                                         </div>
