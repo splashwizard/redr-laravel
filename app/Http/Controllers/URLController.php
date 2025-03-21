@@ -22,7 +22,7 @@ class URLController extends Controller
                 'id' => $url['id'],
                 'sourceURL' => $url['sourceURL'],
                 'shortURL' => $url['shortURL'],
-                'dateUpdated' => date_format($url['updated_at'], 'YYYY-MM-DD')
+                'dateUpdated' => $url['updated_at']
             ];
         }
         return response()->json($response);
@@ -40,10 +40,17 @@ class URLController extends Controller
         // Create a new URL record
     
         $bulk_urls = preg_split('/\r\n|\r|\n/', $request->input('bulkURL')); // Assign value from request
-        foreach($bulk_urls as $bulk_url){
+        if(count($bulk_urls) > 0) {
+            foreach($bulk_urls as $bulk_url){
+                $url = new Url();
+                // $url->sourceURL = $request->input('singleURL'); // Assign value from request
+                $url->sourceURL = $bulk_url;
+                $url->file = $filePath;
+                $url->save(); // Save to database
+            }
+        } else {
             $url = new Url();
-            $url->sourceURL = $request->input('singleURL'); // Assign value from request
-            $url->shortURL = $bulk_url;
+            $url->sourceURL = $request->input('singleURL');
             $url->file = $filePath;
             $url->save(); // Save to database
         }

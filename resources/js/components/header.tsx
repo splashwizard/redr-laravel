@@ -44,11 +44,11 @@ export function Header() {
                                             <p className="mb-1 mt-3 fw-semibold">Kevin Medina</p>
                                             <p className="fw-light text-muted mb-0">kevinmedina@gmail.com</p>
                                         </div>
-                                        <a href={route('user-profile')} className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">person</i> My Profile
+                                        <a href={route('user-profile') + "?tab=my_profile"} className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">person</i> My Profile
                                         </a>
-                                        <a href="#" className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">loyalty</i> Subscriptions</a>
-                                        <a href="#" className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">paid</i> Billing</a>
-                                        <a href="#" className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">settings</i> Settings</a>
+                                        <a href={route('user-profile') + "?tab=subscriptions"} className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">loyalty</i> Subscriptions</a>
+                                        <a href={route('user-profile') + "?tab=billing"} className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">paid</i> Billing</a>
+                                        <a href={route('user-profile') + "?tab=my_profile"} className="dropdown-item"><i className="material-icons-outlined dropdown-item-icon text-primary">settings</i> Settings</a>
                                         <Link className="dropdown-item" method="post" href={route('logout')} as="button">
                                             <i className="material-icons-outlined dropdown-item-icon text-primary">power_settings_new</i>
                                             Logout

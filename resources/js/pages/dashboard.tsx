@@ -6,6 +6,7 @@ import { Footer } from '@/components/footer';
 import '../../css/dashboard.css';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 import {
   Chart as ChartJS,
@@ -98,7 +99,7 @@ function UrlTr({ url, setDeletingId } : any) {
     const [isEditing, setIsEditing] = useState(false);
     const [sourceURL, setSourceURL] = useState(url.sourceURL);
     const [shortURL, setShortURL] = useState(url.shortURL);
-    const [dateUpdated, setDateUpdated] = useState(url.updated_at);
+    const [dateUpdated, setDateUpdated] = useState(url.dateUpdated);
     const [expOn, setExpOn] = useState(url.expOn);
     const [masked, setMasked] = useState(url.masked);
 
@@ -130,12 +131,14 @@ function UrlTr({ url, setDeletingId } : any) {
 
     }
 
+    console.log('url', url);
+
     return (
         <tr>
             <td><input type="checkbox" className="row-checkbox" data-id="1"/></td>
             <td><span className="editable" data-field="sourceUrl">{ isEditing ? <input className="editable-input" value={sourceURL} onChange={(e) => setSourceURL(e.target.value)} /> : sourceURL}</span></td>
             <td><span className="editable" data-field="shortUrl">{ isEditing ? <input className="editable-input" value={shortURL} onChange={(e) => setShortURL(e.target.value)} /> : shortURL}</span></td>
-            <td><span className="editable" data-field="dateUpdated">{dateUpdated}</span></td>
+            <td><span className="editable" data-field="dateUpdated">{dayjs(dateUpdated).format("MM-DD-YYYY HH:mm:ss a")}</span></td>
             <td><span className="editable" data-field="expOn">{ expOn}</span></td>
             <td><span className="editable" data-field="dateUpdated">{masked}</span></td>
             {/* <td><span className="editable" data-field="expOn">{ isEditing ? <input className="editable-input" value={expOn} onChange={(e) => setExpOn(e.target.value)} /> : expOn}</span></td> */}
@@ -181,6 +184,11 @@ export default function Dashboard() {
     });
     const [file, setFile] = useState(null);
     const closeRef = useRef(null);
+    const deleteRef = useRef(null);
+
+    const [payChecked, setPayChecked] = useState(false);
+    const [plataChecked, setPlataChecked] = useState(false);
+    const [latterChecked, setLatterChecked] = useState(false);
 
 
     useEffect(() => {
@@ -192,9 +200,7 @@ export default function Dashboard() {
     }
 
     const fetchURLs = () => {
-        console.log('Get Data by BackEnd!');
         axios.get('urls').then((response) => {
-            console.log('data', response.data);
             setURLs(response.data);
         })
     }
@@ -210,6 +216,7 @@ export default function Dashboard() {
             .delete(`urls/${deletingId}`)
             .then((response) => {
                 setURLs(urls.filter(url => url.id !== parseInt(deletingId)));
+                deleteRef.current.click();
             })
             .catch((error) => {
                 console.log({ errors: error.response.data.errors })
@@ -236,7 +243,7 @@ export default function Dashboard() {
         })
     }
 
-    const handleAddURL=(e) => {
+    const handleAddURL = (e) => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('singleURL', newUrl.singleURL);
@@ -251,8 +258,6 @@ export default function Dashboard() {
             })
             .catch((error) => this.setState({ errors: error.response.data.errors }));
     }
-
-    console.log('rendering', urls);
 
     return (
         <>
@@ -377,7 +382,7 @@ export default function Dashboard() {
                                     <div className="modal-content">
                                         <div className="modal-header">
                                         <h5 className="modal-title" id="deleteConfirmationModalLabel">Confirm Delete</h5>
-                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" ref={deleteRef} aria-label="Close"></button>
                                         </div>
                                         <input type="hidden" value={deletingId} />
                                         <div className="modal-body">Are you sure you want to delete this item?</div>
@@ -403,7 +408,7 @@ export default function Dashboard() {
 
                                     <div className="brand-card card">
                                     <div className="card-btm">
-                                        <h5>Rraffic by Domain</h5>
+                                        <h5>Traffic by Domain</h5>
                                     </div>
                                     </div>
 
@@ -427,7 +432,7 @@ export default function Dashboard() {
                                 <h2>Integrations Management</h2>
                                 <div className="row mt-4">
                                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
-                                    <div className="brand-card card active-card">
+                                    <div className={payChecked ? "brand-card card active-card" : "brand-card card"}>
                                         <img src={PayyIcon} alt="Brand Logo" className="brand-logo"/>
                                         <div className="card-btm">
                                         <div className="config-tab">
@@ -438,7 +443,7 @@ export default function Dashboard() {
                                         </div>
 
                                         <label className="switch">
-                                            <input className="togle-sw" type="checkbox" checked onchange="toggleStatus(this)"/>
+                                            <input className="togle-sw" type="checkbox" checked={payChecked} onChange={() => setPayChecked(!payChecked)}/>
                                             <span className="slider"></span>
                                         </label>
                                         </div>
@@ -446,7 +451,7 @@ export default function Dashboard() {
                                     </div>
 
                                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
-                                    <div className="brand-card card active-card">
+                                    <div className={plataChecked ? "brand-card card active-card" : "brand-card card"}>
                                         <img src={PlataIcon} alt="Brand Logo" className="brand-logo"/>
                                         <div className="card-btm">
                                         <div className="config-tab">
@@ -455,9 +460,9 @@ export default function Dashboard() {
                                             API Config
                                             </button>
                                         </div>
-
+w
                                         <label className="switch">
-                                            <input className="togle-sw" type="checkbox" checked onchange="toggleStatus(this)"/>
+                                            <input className="togle-sw" type="checkbox" checked={plataChecked} onChange={() => setPlataChecked(!plataChecked)}/>
                                             <span className="slider"></span>
                                         </label>
                                         </div>
@@ -465,7 +470,7 @@ export default function Dashboard() {
                                     </div>
 
                                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
-                                    <div className="brand-card card active-card">
+                                    <div className={latterChecked ? "brand-card card active-card" : "brand-card card"}>
                                         <img src={LetterIcon} alt="Brand Logo" className="brand-logo"/>
                                         <div className="card-btm">
                                         <div className="config-tab">
@@ -476,7 +481,7 @@ export default function Dashboard() {
                                         </div>
 
                                         <label className="switch">
-                                            <input className="togle-sw" type="checkbox" checked={true} onchange="toggleStatus(this)" />
+                                            <input className="togle-sw" type="checkbox" checked={latterChecked} onChange={() => setLatterChecked(!latterChecked)}/>
                                             <span className="slider"></span>
                                         </label>
                                         </div>

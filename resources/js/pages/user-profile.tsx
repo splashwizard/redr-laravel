@@ -108,6 +108,7 @@ export default function Dashboard() {
         },
     ]);
     const [deletingId, setDeletingId] = useState('');
+    const [tab, setTab] = useState('subscriptions');
 
     const handleChangeTimeRange = (e) => {
         setTimeRange(e.target.value);
@@ -145,8 +146,8 @@ export default function Dashboard() {
                         <div className="nav-tabs-dropdown btn-group d-block d-md-none">
                         <button className="btn btn-primary dropdown-toggle" type="button" id="tabDropdown" data-bs-toggle="dropdown">Select Option</button>
                         <ul className="dropdown-menu" id="dropdownTabs">
-                            <li><a className="tab-drop dropdown-item active" data-bs-target="#myprofile-tab">My Profile</a></li>
-                            <li><a className="tab-drop dropdown-item" data-bs-target="#subscription-tab">Subscriptions</a></li>
+                            <li><a className={tab === 'profile' ? "tab-drop dropdown-item active" : "tab-drop dropdown-item"} data-bs-target="#myprofile-tab">My Profile</a></li>
+                            <li><a className={tab === 'subscriptions' ? "tab-drop dropdown-item active" : "tab-drop dropdown-item"} data-bs-target="#subscription-tab">Subscriptions</a></li>
                             <li><a className="tab-drop dropdown-item" data-bs-target="#billing-tab">Billing</a></li>
                             <li><a className="tab-drop dropdown-item" data-bs-target="#settings-tab">Settings</a></li>
                             <li><a href={route('dashboard')} className="dashboard-btn only-tab-btn tab-drop">Dashboard</a></li>
@@ -155,16 +156,16 @@ export default function Dashboard() {
                         </div>
                         <ul className="nav nav-tabs d-none d-md-flex" id="tabList" role="tablist">
                         <li className="nav-item" role="presentation">
-                            <a className="tab-drop nav-link active" data-bs-toggle="tab" href="#myprofile-tab" aria-selected="true" role="tab">My Profile</a>
+                            <a className={tab === 'profile' ? "tab-drop nav-link active" : "tab-drop nav-link"} data-bs-toggle="tab" href="#myprofile-tab" aria-selected="true" role="tab">My Profile</a>
                         </li>
                         <li className="nav-item" role="presentation">
-                            <a className="tab-drop nav-link" data-bs-toggle="tab" href="#subscription-tab" aria-selected="false" tabindex="-1" role="tab">Subscriptions</a>
+                            <a className={tab === 'subscriptions' ? "tab-drop nav-link active" : "tab-drop nav-link"} data-bs-toggle="tab" href="#subscription-tab" aria-selected="false" tabindex="-1" role="tab">Subscriptions</a>
                         </li>
                         <li className="nav-item" role="presentation">
-                            <a className="tab-drop nav-link" data-bs-toggle="tab" href="#billing-tab" aria-selected="false" tabindex="-1" role="tab">Billing</a>
+                            <a className={tab === 'billing' ? "tab-drop nav-link active" : "tab-drop nav-link"} data-bs-toggle="tab" href="#billing-tab" aria-selected="false" tabindex="-1" role="tab">Billing</a>
                         </li>
                         <li className="nav-item" role="presentation">
-                            <a className="tab-drop nav-link" data-bs-toggle="tab" href="#settings-tab" aria-selected="false" tabindex="-1" role="tab">Settings</a>
+                            <a className={tab === 'settings' ? "tab-drop nav-link active" : "tab-drop nav-link"} data-bs-toggle="tab" href="#settings-tab" aria-selected="false" tabindex="-1" role="tab">Settings</a>
                         </li>
                         <li className="nav-item" role="presentation">
                             <a href={route('dashboard')} className="dashboard-btn only-tab-btn tab-drop nav-link" aria-selected="false" tabindex="-1" role="tab">Dashboard</a>
@@ -178,25 +179,25 @@ export default function Dashboard() {
                         </ul>
 
                         <div className="tab-content">
-                        <div className="tab-pane fade show active" id="myprofile-tab" role="tabpanel">
+                        <div className={tab === 'profile' ? "tab-pane fade show active" : "tab-pane fade"} id="myprofile-tab" role="tabpanel">
                             <div className="container mt-3">
                             <h2>My Profile</h2>
                             </div>
                         </div>
 
-                        <div className="tab-pane fade" id="subscription-tab" role="tabpanel">
+                        <div className={tab === 'subscriptions' ? "tab-pane fade show active" : "tab-pane fade"} id="subscription-tab" role="tabpanel">
                             <div className="datd-tbl container mt-3">
                             <div className="head-title">
                                 <h2>Subscription</h2>
                             </div>
                             </div>
                         </div>
-                        <div className="tab-pane fade" id="billing-tab" role="tabpanel">
+                        <div className={tab === 'billing' ? "tab-pane fade show active" : "tab-pane fade"} id="billing-tab" role="tabpanel">
                             <div className="datd-tbl container mt-3">
                             <h2>Billing Details</h2>
                             </div>
                         </div>
-                        <div className="tab-pane fade" id="settings-tab" role="tabpanel">
+                        <div className={tab === 'settings' ? "tab-pane fade show active" : "tab-pane fade"} id="settings-tab" role="tabpanel">
                             <div className="datd-tbl container mt-3">
                             <h2>Settings</h2>
                             </div>

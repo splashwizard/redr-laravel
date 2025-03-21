@@ -44,15 +44,15 @@ export function Footer() {
                 <form action="#" method="post" className="php-email-form" data-aos="fade-up" data-aos-delay="200">
                     <div className="row gy-4">
                     <div className="col-md-6">
-                        <input type="text" name="name" className="form-control" placeholder="Full Name" required="" />
+                        <input type="text" name="name" className="form-control" placeholder="Full Name" required />
                     </div>
 
                     <div className="col-md-6">
-                        <input type="email" className="form-control" name="email" placeholder="Email" required="" />
+                        <input type="email" className="form-control" name="email" placeholder="Email" required />
                     </div>
 
                     <div className="col-md-12">
-                        <textarea className="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                        <textarea className="form-control" name="message" rows="6" placeholder="Message" required></textarea>
                     </div>
 
                     <div className="col-md-12 text-center">
