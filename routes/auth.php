@@ -39,6 +39,7 @@ Route::middleware('guest')->group(function () {
 
 // Route::resource('urls', URLController::class);
 Route::get('/urls', [URLController::class, 'index']);
+Route::post('/urls/report', [URLController::class, 'getReport']);
 Route::post('/urls/{id}', [URLController::class, 'change']);
 Route::post('/urls', [URLController::class, 'store']);
 Route::delete('/urls/{id}', [URLController::class, 'delete']);

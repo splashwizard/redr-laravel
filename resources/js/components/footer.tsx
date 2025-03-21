@@ -41,7 +41,7 @@ export function Footer() {
                     <h2>Get in touch!</h2>
                     <p>We thrive to ensure that you get the most out of your experience</p>
                 </div>
-                <form action="#" method="post" className="php-email-form" data-aos="fade-up" data-aos-delay="200">
+                <form action="javascript:void(0)" method="post" className="php-email-form" data-aos="fade-up" data-aos-delay="200">
                     <div className="row gy-4">
                     <div className="col-md-6">
                         <input type="text" name="name" className="form-control" placeholder="Full Name" required />

@@ -8,6 +8,8 @@ import '../../css/user-profile.css';
 import { Link, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSearchParams } from "react-router-dom";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -83,18 +85,18 @@ const labels = {
     "1h": ["00:00", "00:10", "00:20", "00:30", "00:40", "00:50", "01:00"],
     "1d": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     "7d": ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
-    "14d": Array.from({ length: 14 }, (_, i) => `Day ${i + 1}`),
     "30d": Array.from({ length: 30 }, (_, i) => `Day ${i + 1}`),
   };
 const mockData = {
     "1h": [10, 20, 30, 40, 50, 60, 70], // Traffic for 1 hour (7 data points)
     "1d": [100, 200, 150, 300, 250, 400, 350], // Traffic for 1 day (7 data points)
     "7d": [500, 600, 700, 800, 900, 1000, 1100], // Traffic for 7 days (7 data points)
-    "14d": [500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800], // Traffic for 14 days
     "30d": Array.from({ length: 30 }, (_, i) => 500 + i * 50), // Traffic for 30 days
 };
 
 export default function Dashboard() {
+    const url = window.location.href;
+    const params = new URLSearchParams(new URL(url).search);
     const [urls, setURLs] = useState(data);
     const [timeRange, setTimeRange] = useState('7d');
     const [dataLabels, setDataLabels] = useState(labels["7d"]);
@@ -108,7 +110,7 @@ export default function Dashboard() {
         },
     ]);
     const [deletingId, setDeletingId] = useState('');
-    const [tab, setTab] = useState('subscriptions');
+    const [tab, setTab] = useState(params.get('tab') ?? 'profile');
 
     const handleChangeTimeRange = (e) => {
         setTimeRange(e.target.value);
